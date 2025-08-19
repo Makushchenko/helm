@@ -39,3 +39,4 @@ h ls
 k get pods
 h uninstall demo-chart
 h plugin list
+helm get manifest current-version

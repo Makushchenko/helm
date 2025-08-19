@@ -67,3 +67,23 @@ helm upgrade --install <release> ./helm --set image.tag=... -n <namespace> --wai
   * **install:** delete the release on failure;
   * **upgrade:** roll back to the previous revision on failure;
   * also **implies `--wait`**. ([Helm](https://helm.sh/docs/helm/helm_install/))
+
+---
+
+### 4) Inspect the live manifest of an installed release
+
+```bash
+helm get manifest current-version
+```
+
+**Description:** Prints the **generated YAML manifest** for the `current-version` release (all Kubernetes resources rendered by the chart and its dependencies). Useful for troubleshooting, diffs, and verifying what’s actually applied in the cluster. ([helm.sh](https://helm.sh/docs/helm/helm_get_manifest/?utm_source=chatgpt.com))
+
+---
+
+### 5) Roll back a release to a specific revision
+```bash
+helm rollback current-version 1
+```
+**Description:** Reverts the `current-version` release to **revision 1**. Use `helm history current-version` to see available revisions; if the revision is omitted or set to `0`, Helm rolls back to the **previous** release. You can add `--wait` (and set `--timeout`) to wait for resources to become Ready. ([helm.sh](https://helm.sh/docs/helm/helm_rollback/))
+
+---
